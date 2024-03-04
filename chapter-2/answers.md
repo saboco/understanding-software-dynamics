@@ -108,4 +108,4 @@ fdiv: 100000 iterations, 1158801 cycles, 11.59 cycles/iteration, fdiv goes down 
 fmul: 1000000 iterations, 2673888 cycles, 2.67 cycles/iteration
 fdiv: 1000000 iterations, 11722536 cycles, 11.72 cycles/iteration
 
-There were no noticable change
+There was no noticeable change
