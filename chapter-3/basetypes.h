@@ -32,7 +32,7 @@ typedef long long unsigned int uint64;
 #define CL(x) x##LL
 #define CLU(x) x##LLU
 
-#elif defined(__x86_64)
+#elif defined(__x86_64__) || defined(_M_X64)
 /* make almost the same as ARM-32 */
 typedef long long int int64;
 typedef long long unsigned int uint64;

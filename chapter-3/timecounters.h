@@ -10,7 +10,7 @@
 #define __TIMERCOUNTERS_H__
 
 /* Add others as you find and test them */
-#define Isx86_64	defined(__x86_64)
+#define Isx86_64	(defined(__x86_64) || defined(_M_X64))
 #define IsAmd_64	Isx86_64 && defined(__znver1) 
 #define IsIntel_64	Isx86_64 && !defined(__znver1)
 
@@ -18,7 +18,12 @@
 #define IsRPi4		defined(__ARM_ARCH) && (__ARM_ARCH == 8)
 #define IsRPi4_64	IsRPi4 && IsArm_64
 
+#if defined(_WIN32) || defined(WIN32)
+#include <intrin.h>
+#include "getimeofday_win.cc"
+#else
 #include <sys/time.h>		// gettimeofday
+#endif
 
 #if Isx86_64
 #include <x86intrin.h>		// __rdtsc()
@@ -26,7 +31,7 @@
 
 // Return a constant-rate "cycle" counter
 inline int64_t GetCycles() {
-#if Isx86_64
+#if defined(Isx86_64)
    // Increments once per cycle, implemented as increment by N every N (~35) cycles
    return __rdtsc();
 
